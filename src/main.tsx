@@ -12,6 +12,7 @@ import Auth from "./pages/auth"
 import Following from "./pages/following"
 import Followers from "./pages/followers"
 import UserProfile from "./pages/userProfile"
+import AuthGuard from "./features/user/authGuard"
 const container = document.getElementById("root")
 
 const router = createBrowserRouter([
@@ -55,7 +56,9 @@ if (container) {
       <Provider store={store}>
         <NextUIProvider>
           <ThemeProvider>
-            <RouterProvider router={router} />
+            <AuthGuard>
+              <RouterProvider router={router} />
+            </AuthGuard>
           </ThemeProvider>
         </NextUIProvider>
       </Provider>

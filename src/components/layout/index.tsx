@@ -1,9 +1,25 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, replace, useNavigate } from "react-router-dom"
 import Container from "../container"
 import Header from "../header"
 import NavBar from "../navBar"
 
+import {
+  selectIsAuthenticated,
+  selectUser,
+} from "../../features/user/userSlice"
+import { useAppSelector } from "../../app/hooks"
+import { useEffect } from "react"
+
 const Layout = () => {
+  const isAuth = useAppSelector(selectIsAuthenticated)
+  const user = useAppSelector(selectUser)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/auth")
+    }
+  }, [])
   return (
     <>
       <Header />
