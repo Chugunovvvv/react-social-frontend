@@ -26,13 +26,14 @@ const Register: FC<Props> = ({ setSelected }) => {
     defaultValues: {
       email: "",
       password: "",
+      name: "",
     },
   })
 
   const [error, setError] = useState<string>("")
   const [register, { isLoading }] = useRegisterMutation()
 
-  const onSumbit = async (data: Register) => {
+  const onSubmit = async (data: Register) => {
     try {
       await register(data).unwrap()
       setSelected("login")
@@ -44,7 +45,7 @@ const Register: FC<Props> = ({ setSelected }) => {
   }
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSumbit)}>
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <Input
         control={control}
         name="name"
